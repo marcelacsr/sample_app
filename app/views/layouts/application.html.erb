@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= csrf_meta_tags %>
+<!--
+  stylesheet_link_tag function with two
+  arguments: a string, indicating the path
+  to the stylesheet, and a hash with two
+  elements, indicating the media type and
+  telling Rails to use the turbolinks feature
+  added in Rails 4.0. Because of the
+< %= %> brackets, the results are inserted
+into the template by ERb, and if you view
+the source of the page in your browser you
+should see the HTML needed to include a
+stylesheet
+-->
   <%= stylesheet_link_tag    'application', media: 'all',
                              'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
