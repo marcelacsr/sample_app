@@ -3,7 +3,6 @@
 
 /* mixins, variables, etc. */
 
-$gray-medium-light: #eaeaea;
 
 /* universal */
 
@@ -74,10 +73,10 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
+  border-top: 1px solid $gray-dark;
   color: $gray-light;
-  a{
-    color:$gray;
+  a {
+    color: $gray;
     &:hover {
       color: $gray-darker;
     }
@@ -88,9 +87,9 @@ footer {
   ul {
     float: right;
     list-style: none;
-  }
-  li {
-    float: left;
-    margin-left: 15px;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
   }
 }
