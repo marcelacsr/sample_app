@@ -7,3 +7,7 @@
 #two:
 #  name: MyString
 #  email: MyString
+one:
+  name: Primeiro
+  email: primeiro@email.com
+  password_digest: <%= User.digest('password') %>
