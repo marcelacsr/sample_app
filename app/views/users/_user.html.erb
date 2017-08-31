@@ -1,0 +1,11 @@
+<li>
+  <%= gravatar_for user, size: 50 %>
+  <%= link_to user.name, user %>
+  <!--user.name=atributo nome do obj, path show#object == show#user-->
+  <% if current_user.admin? && !current_user?(user) %>
+      | <%= link_to "delete", user, method: :delete,
+                    data: {confirm: "You sure?"} %>
+      <!--User delete links (viewable only by admins)-->
+  <% end %>
+
+</li>
