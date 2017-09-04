@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
+  # Here the option dependent: :destroy arranges for
+  # the dependent microposts to be destroyed when the
+  # user itself is destroyed. This prevents userless
+  # microposts from being stranded in the database
+  # when admins choose to remove users from the system.
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -84,7 +90,11 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-
+  # Defines a proto-feed.
+  # See "Following users" for the full implementation.
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
 
   private
 
