@@ -6,18 +6,21 @@ class User < ApplicationRecord
   # microposts from being stranded in the database
   # when admins choose to remove users from the system.
 
-  has_many :active_relationships,  class_name:  "Relationship",
-           foreign_key: "follower_id",
-           dependent:   :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-           foreign_key: "followed_id",
-           dependent:   :destroy
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "80x80" }, default_url: ''
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
-  has_many :following, through: :active_relationships,  source: :followed
+  has_many :active_relationships, class_name: "Relationship",
+           foreign_key: "follower_id",
+           dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship",
+           foreign_key: "followed_id",
+           dependent: :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
+  before_save :downcase_email
   before_create :create_activation_digest
 
   validates :name, presence: true, length: {maximum: 50}
@@ -28,6 +31,8 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+
+  validates :bio, length: {maximum: 160}
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -75,7 +80,7 @@ class User < ApplicationRecord
 
   # Activates an account.
   def activate
-    update_attribute(:activated,    true)
+    update_attribute(:activated, true)
     update_attribute(:activated_at, Time.zone.now)
   end
 
@@ -87,7 +92,7 @@ class User < ApplicationRecord
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
-    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_digest, User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
@@ -137,13 +142,9 @@ class User < ApplicationRecord
 
   # Creates and assigns the activation token and digest.
   def create_activation_digest
-    self.activation_token  = User.new_token
+    self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
-
-
-
-
 
 
 end

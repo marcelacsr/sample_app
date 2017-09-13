@@ -12,18 +12,35 @@
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
 
+        <%= f.label :bio, "Update your bio" %>
+        <%= f.text_field :bio, class: 'form-control' %>
+
+        <%= f.label :avatar, "Change profile picture" %>
+        <%= f.file_field :avatar %>
+
         <%= f.label :password %>
         <%= f.password_field :password, class: 'form-control' %>
 
         <%= f.label :password_confirmation, "Confirmation" %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+
+
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails">change</a>
-    </div>
+    <!--<div class="gravatar_edit">-->
+      <!--< %= gravatar_for @user %>-->
+      <!--&lt;!&ndash;usuário pode fazer upload e trocar sua foto de perfil&ndash;&gt;-->
+      <!--<a href="http://gravatar.com/emails">change</a>-->
+    <!--</div>-->
+
+    <!--< %= form_for @user, url: users_path do |form| %>-->
+
+    <!--< % end %>-->
+
+    <!--< %= image_tag @user.avatar.url %>-->
+    <!--< %= image_tag @user.avatar.url(:medium) %>-->
+    <!--< %= image_tag @user.avatar.url(:thumb) %>-->
   </div>
 </div>

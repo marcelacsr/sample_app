@@ -33,12 +33,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # def update_bio
+  #   @user = User.find()
+  #   if @user.update_attributes(user_params)
+  # end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-
       # Handle a successful update.
       flash[:success] = "Profile updated"
+
+      # if @user.
+      #   #Quando atualizar a bio, como exibir mensagens diferentes?
+      # flash[:success] = "Bio updated"
       redirect_to @user
 
     else
@@ -69,7 +77,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation,:bio, :avatar)
   end
 
   # Confirms a logged-in user.
