@@ -16,5 +16,6 @@ module UsersHelper
                 style: "width:#{options[:size]}px;height:#{options[:size]}px"
     end
   end
+
 end
 

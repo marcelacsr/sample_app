@@ -1,0 +1,27 @@
+<% provide(:title, 'Notifications') %>
+
+<p><%= link_to "View my profile", current_user %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Notifications (<%= @notifications.count %>)</h1>
+      <% @notifications.each do |notification| %>
+        <p> <%= link_to notification.follower.name, notification.follower %> seguiu você. </p>
+          <!--no link_to url=notification.follower, o rails pega o show daquele objeto(user) no controller-->
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <h2>Already read</h2>
+    </div>
+  </div>
+</div>
+
+<!--<h3>(< %= @user.notifications.count %>)</h3>-->
+
+<!--< %= form_for(:@follow_notification, :url => {:action => "create"}) do |f| %>-->
+
+<!--&lt;!&ndash;< %= f.text_field(:message, :placeholder => "Enter your message") %>&ndash;&gt;-->
+<!--&lt;!&ndash;< %= f.hidden_field(:user_id, :value => session[:user_id]) %>&ndash;&gt;-->
+<!--< %= f.submit("Notificacoes") %>&ndash;&gt;-->
+
+<!--< % end %>-->

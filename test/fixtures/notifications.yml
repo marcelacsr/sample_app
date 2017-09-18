@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: MyText
+  follower_id: 1
+  followed_id: 1
+  notification_read: false
+
+two:
+  message: MyText
+  follower_id: 1
+  followed_id: 1
+  notification_read: false
