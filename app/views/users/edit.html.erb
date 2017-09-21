@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@user)  do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
         <%= f.label :name %>
@@ -12,7 +12,7 @@
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control' %>
 
-        <%= f.label :bio, "Update your bio" %>
+        <%= f.label :bio, "Bio" %>
         <%= f.text_field :bio, class: 'form-control' %>
 
         <%= f.label :avatar, "Change profile picture" %>
@@ -23,6 +23,9 @@
 
         <%= f.label :password_confirmation, "Confirmation" %>
         <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+        <%= f.label :private_profile, "Private profile" %>
+        <%= f.check_box :private_profile %>
 
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

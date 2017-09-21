@@ -31,6 +31,13 @@ module SessionsHelper
   end
 
 
+  # não mostrar a partial dos microposts se o user não possuir relacionamento
+  def private_profile?
+    user = User.find_by(params[:id])
+    redirect_to (user.url) unless user.private_profile?
+  end
+
+
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?
@@ -61,6 +68,4 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
-
-
 end

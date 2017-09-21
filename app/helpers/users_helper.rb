@@ -12,7 +12,9 @@ module UsersHelper
     if user.avatar.url.empty?
       gravatar_for(user)
     else
-      image_tag user.avatar.url(:thumb), class: 'gravatar img-circle', #modificar thumb para passar uma imagem maior para exibir no perfil quando chamar avatar_for
+
+      image_tag user.avatar.url(:thumb), class: 'gravatar img-circle',
+                #modificar thumb para passar uma imagem maior para exibir no perfil quando chamar avatar_for
                 style: "width:#{options[:size]}px;height:#{options[:size]}px"
     end
   end

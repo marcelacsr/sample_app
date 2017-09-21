@@ -4,9 +4,9 @@
 /* mixins, variables, etc. */
 
 @mixin box_sizing {
-  -moz-box-sizing:    border-box;
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
+  box-sizing: border-box;
 }
 
 /* universal */
@@ -25,7 +25,7 @@ textarea {
 
 .center {
   text-align: center;
-  h1{
+  h1 {
     margin-bottom: 10px;
   }
 }
@@ -56,6 +56,7 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+
 /* header */
 
 #logo {
@@ -72,7 +73,6 @@ p {
     text-decoration: none;
   }
 }
-
 
 /* footer */
 
@@ -99,6 +99,7 @@ footer {
     }
   }
 }
+
 /* miscellaneous */
 
 .debug_dump {
@@ -184,7 +185,6 @@ aside {
   padding: 0;
 }
 
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -213,30 +213,31 @@ input {
   }
 }
 
-  .checkbox {
-    margin-top: -10px;
-    margin-bottom: 10px;
-    span {
-      margin-left: 20px;
-      font-weight: normal;
-    }
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
   }
+}
 
-  #session_remember_me {
-    width: auto;
-    margin-left: 0;
-  }
-  /* Users index */
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
 
-  .users {
-    list-style: none;
-    margin: 0;
-    li {
-      overflow: auto;
-      padding: 10px 0;
-      border-bottom: 1px solid $gray-lighter;
-    }
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    //border-bottom: 1px solid $gray-lighter;
   }
+}
 
 /* microposts */
 
@@ -288,7 +289,7 @@ span.picture {
 
 /* panels */
 
-.nome-profile{
+.nome-profile {
   font-size: 21px;
   font-weight: bold;
   line-height: 28px;
@@ -300,6 +301,19 @@ span.picture {
   line-height: 20px;
   margin-bottom: 12px;
 }
-.info{
+
+.info {
   margin-top: 10px;
+}
+
+.line {
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.btn-group {
+  margin-bottom: 12px;
+}
+
+.button {
+  color: #FFFFFF;
 }

@@ -6,15 +6,18 @@ class RelationshipsController < ApplicationController
   # the create and destroy actions
 
   def create
-    @user = User.find(params[:followed_id])
+    @user = User.find(params[:follower_id])
     current_user.follow(@user)
     # Ajax, which allows web pages
     # to send requests asynchronously
     # to the server without leaving the page
+    flash[:success] = " #{@user.name} was accepted!"
+    # marcar como lida a notificação
+    redirect_to notifications_url
 
-
+    #not working\/??
     respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to @user}
       format.js
     end
   end
@@ -27,6 +30,7 @@ class RelationshipsController < ApplicationController
     #the respond_to method, responding appropriately
     # depending on the type of request.
     respond_to do |format|
+      flash[:success] = "Unfollowed!"
       format.html { redirect_to @user }
       format.js
     end

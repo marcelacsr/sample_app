@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])#.per_page(20)
+    @users = User.paginate(page: params[:page])#.per_page(20) not working
   end
 
   def show
@@ -33,26 +33,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # def update_bio
-  #   @user = User.find()
-  #   if @user.update_attributes(user_params)
-  # end
 
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       # Handle a successful update.
       flash[:success] = "Profile updated"
-
       # if @user.
       #   #Quando atualizar a bio, como exibir mensagens diferentes?
       # flash[:success] = "Bio updated"
       redirect_to @user
-
     else
       render 'edit'
     end
   end
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
@@ -77,7 +72,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation,:bio, :avatar)
+                                 :password_confirmation, :bio, :avatar)
+  end
+
+  # não mostrar a partial dos microposts se o user não possuir relacionamento
+  def private_profile
+    @user = User.find(params[:id])
+    redirect_to (@user.url) unless @user.private_profile?
   end
 
   # Confirms a logged-in user.
@@ -100,4 +101,4 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user.admin?
   end
 
-  end
+end

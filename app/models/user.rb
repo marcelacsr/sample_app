@@ -44,6 +44,8 @@ class User < ApplicationRecord
 
   validates :bio, length: {maximum: 160}
 
+  validates :private_profile, presence: false
+
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -130,8 +132,8 @@ class User < ApplicationRecord
 
   # Follows a user.
   def follow(other_user)
-    following << other_user
-    Notification.create({followed_id: other_user.id, follower_id: id })
+    followers << other_user
+    #Notification.create({followed_id: other_user.id, follower_id: id })
   end
 
   # Unfollows a user.
@@ -142,6 +144,13 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+
+
+  def send_follow_notification(other_user)
+    Notification.create({followed_id: other_user.id, follower_id: id})
+    #send email to followed
   end
 
   # def received_notifications(notification)
@@ -164,6 +173,5 @@ class User < ApplicationRecord
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
-
 
 end
