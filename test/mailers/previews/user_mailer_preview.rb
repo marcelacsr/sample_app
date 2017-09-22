@@ -25,5 +25,4 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.notification_email(user)
   end
 
-
 end

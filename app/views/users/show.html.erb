@@ -5,7 +5,9 @@
 
         <div class="row">
           <div class="col-md-12">
-            <%= avatar_for current_user, size: 50 %>
+            <!--< %= avatar_for current_user, size: 50 %>-->
+            <%= gravatar_for @user %>
+            <!--consertar /\-->
           </div>
         </div>
         <div class="row">
