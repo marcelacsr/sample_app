@@ -8,6 +8,9 @@ class NotificationsController < ApplicationController
   def create
     @user = User.find(params[:follower_id])
     current_user.send_follow_notification(@user)
+
+    UserMailer.send_notification_email(@user).deliver_now
+
     flash[:success] = "Notification sent!"
     redirect_to @user
   end

@@ -21,4 +21,11 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Password reset"
   end
 
+
+  def notification_email(user)
+    # @follower = follower
+    @user = user
+    mail to: user.email, subject: "New notification"
+  end
+
 end

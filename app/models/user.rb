@@ -101,6 +101,14 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  def send_notification_email
+    UserMailer.deliver_notification_email
+
+    # UserMailer.create_notification_email
+  #????????????????????????????????????????
+
+  end
+
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
@@ -151,6 +159,7 @@ class User < ApplicationRecord
   def send_follow_notification(other_user)
     Notification.create({followed_id: other_user.id, follower_id: id})
     #send email to followed
+    send_notification_email
   end
 
   # def received_notifications(notification)
