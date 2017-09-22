@@ -6,6 +6,7 @@ User.create!(name: "Example User",
              activated: true,
              activated_at: Time.zone.now,
         # bio:
+        # private_profile: true
 )
 
 9.times do |n|

@@ -72,14 +72,14 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation, :bio, :avatar)
+                                 :password_confirmation, :bio, :avatar, :private_profile)
   end
 
   # não mostrar a partial dos microposts se o user não possuir relacionamento
-  def private_profile
-    @user = User.find(params[:id])
-    redirect_to (@user.url) unless @user.private_profile?
-  end
+  # def private_profile
+  #   @user = User.find(params[:id])
+  #   redirect_to (@user.url) unless private_profile?
+  # end
 
   # Confirms a logged-in user.
   def logged_in_user

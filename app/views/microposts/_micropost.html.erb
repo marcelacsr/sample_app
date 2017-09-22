@@ -1,5 +1,5 @@
-<!--< % if private_profile? %>-->
-
+<% @user=micropost.user %>
+<% if !(@user.private_profile) || (@user==current_user) || (@user.following?(current_user)) %>
 <li id="micropost-<%= micropost.id %>">
   <!--< %= link_to gravatar_for(micropost.user, size: 50), micropost.user %>-->
   <!--< %= link_to avatar_for(micropost.user, size: 50), micropost.user %>-->
@@ -33,5 +33,4 @@
     </div>
   </div>
 </li>
-
-<!--< % end %>-->
+<% end %>

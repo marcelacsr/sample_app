@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20170920214429) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean "private_profile"
+    t.boolean "private_profile", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

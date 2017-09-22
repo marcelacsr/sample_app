@@ -25,7 +25,7 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
 
         <%= f.label :private_profile, "Private profile" %>
-        <%= f.check_box :private_profile %>
+        <%= f.check_box :private_profile, {checked: false} %>
 
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>

@@ -10,7 +10,7 @@ class NotificationsController < ApplicationController
     current_user.send_follow_notification(@user)
     flash[:success] = "Notification sent!"
     redirect_to @user
-    end
+  end
 
 
   def destroy

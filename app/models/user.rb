@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   validates :bio, length: {maximum: 160}
 
-  validates :private_profile, presence: false
+  # validates :private_profile, presence: true
 
   # Returns the hash digest of the given string.
   def User.digest(string)
