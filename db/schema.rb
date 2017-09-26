@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170920214429) do
     t.text "message"
     t.integer "follower_id"
     t.integer "followed_id"
-    t.boolean "notification_read"
+    t.boolean "notification_read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -9,12 +9,12 @@ class NotificationsController < ApplicationController
     @user = User.find(params[:follower_id])
     current_user.send_follow_notification(@user)
 
-    UserMailer.send_notification_email(@user).deliver_now
+    #bugado \/
+    @user.send_notification_email
 
     flash[:success] = "Notification sent!"
     redirect_to @user
   end
-
 
   def destroy
     Notification.find(params[:id]).destroy
@@ -22,7 +22,15 @@ class NotificationsController < ApplicationController
     redirect_to notifications_url
   end
 
-  #
+  def undo
+    notification = Notification.find(params[:notification_id])
+    @user = notification.followed
+    notification.destroy
+    flash[:success] = "Notification undone!"
+    redirect_to @user
+  end
+
+
   # def destroy
   #   Relationships.find(params[:id]).destroy
   #   flash[:success] = "Ignored!"

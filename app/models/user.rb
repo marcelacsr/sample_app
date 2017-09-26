@@ -102,8 +102,7 @@ class User < ApplicationRecord
   end
 
   def send_notification_email
-    UserMailer.deliver_notification_email
-
+    UserMailer.notification_email(self).deliver_now
     # UserMailer.create_notification_email
   #????????????????????????????????????????
 
@@ -154,11 +153,16 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def notified?(current_user)
 
+    received_notifications.where(follower_id: current_user.id).any?
+
+    # Notifications.where(followed_id: id, follower_id: current_user.id)
+  end
 
   def send_follow_notification(other_user)
-    Notification.create({followed_id: other_user.id, follower_id: id})
-    #send email to followed
+      Notification.create({followed_id: other_user.id, follower_id: id})
+    #send email to followed bugado
     send_notification_email
   end
 

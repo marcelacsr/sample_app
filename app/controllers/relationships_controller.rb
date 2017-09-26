@@ -1,3 +1,4 @@
+
 class RelationshipsController < ApplicationController
   before_action :logged_in_user
 
@@ -12,7 +13,9 @@ class RelationshipsController < ApplicationController
     # to send requests asynchronously
     # to the server without leaving the page
     flash[:success] = " #{@user.name} was accepted!"
+
     # marcar como lida a notificação
+
     redirect_to notifications_url
 
     #not working\/??
