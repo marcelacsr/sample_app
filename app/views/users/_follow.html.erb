@@ -1,23 +1,5 @@
-<!-- A form for following a user using Ajax.
-form_for ..., remote: true -->
-
-<!--< %= form_for(current_user.active_relationships.build, remote: true) do |f| %>-->
-    <!--<div>< %= hidden_field_tag :followed_id, @user.id %></div>-->
-    <!--< %= f.submit "Follow", class: "btn btn-primary" %>-->
-    <!--&lt;!&ndash;quando clicar no follow deve gerar uma notificação&ndash;&gt;-->
-    <!--&lt;!&ndash;para a pessoa que esta sendo seguida&ndash;&gt;-->
-<!--< % end %>-->
-<!--<div>-->
-<!--< %= link_to "create a notification - follow",-->
-<!--#             current_user.received_notifications.build,-->
-<!--#             class: "btn btn-primary",-->
-            <!--remote: true %>-->
-<!--</div>-->
-
-<%= form_for(current_user.received_notifications.build, remote: true) do |f| %>
-      <!--< % byebug %>-->
+<%= form_for(current_user.received_notifications
+                 .build, remote: true) do |f| %>
     <div><%= hidden_field_tag :follower_id, @user.id %></div>
     <%= f.submit "Follow", class: "btn btn-primary" %>
-    <!--quando clicar no follow deve gerar uma notificação-->
-    <!--para a pessoa que esta sendo seguida-->
 <% end %>

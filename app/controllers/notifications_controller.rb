@@ -8,12 +8,15 @@ class NotificationsController < ApplicationController
   def create
     @user = User.find(params[:follower_id])
     current_user.send_follow_notification(@user)
-
     #bugado \/
     @user.send_notification_email
+    # flash.now[:success] = "Notification sent!"
+    # redirect_to @user
+    respond_to do |format|
+      format.html { redirect_to @user}
+      format.js
+    end
 
-    flash[:success] = "Notification sent!"
-    redirect_to @user
   end
 
   def destroy

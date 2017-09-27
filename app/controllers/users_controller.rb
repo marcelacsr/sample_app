@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     #debugger
+    @notification = Notification.where(followed: @user, follower: current_user).last
   end
 
   def new

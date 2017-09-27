@@ -154,9 +154,7 @@ class User < ApplicationRecord
   end
 
   def notified?(current_user)
-
     received_notifications.where(follower_id: current_user.id).any?
-
     # Notifications.where(followed_id: id, follower_id: current_user.id)
   end
 

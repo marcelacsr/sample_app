@@ -8,49 +8,28 @@
             <div class="timestamp">
               <p> <%= link_to notification.follower.name, notification.follower %>
                 solicita seguir você.
-                | <%= time_ago_in_words(notification.created_at) %>
-                ago</p>
+                | <%= time_ago_in_words(notification.created_at) %> ago</p>
             </div>
             <% unless notification.notification_read %>
-            <div class="row">
-              <div class="btn-group">
-                <div class="col-md-6">
-                  <!--Criar o relacionamento na tabela de relacionamento e mudar o notification_read para true-->
-
-
-                  <%= form_for(current_user.passive_relationships.build, remote: true) do |f| %>
-
-                      <%= hidden_field_tag :follower_id, notification.follower_id %>
-                      <%= hidden_field_tag :notification_id, notification.id %>
-
-                      <%= f.submit "Approve",
-                                   style: 'color:#FFFFFF;', class: 'btn btn-success' %>
-                      <!--marcar notificações como lidas" que funciona através de AJAX.-->
-                  <% end %>
+                <div class="row">
+                  <div class="btn-group">
+                    <div class="col-md-6">
+                      <%= form_for(current_user.passive_relationships.build, remote: true) do |f| %>
+                          <%= hidden_field_tag :follower_id, notification.follower_id %>
+                          <%= hidden_field_tag :notification_id, notification.id %>
+                          <%= f.submit "Approve",
+                                       style: 'color:#FFFFFF;', class: 'btn btn-success' %>
+                      <% end %>
+                    </div>
+                    <div class="col-md-6">
+                      <%= form_for notification, html: {method: :delete} do |f| %>
+                          <%= f.submit "Ignore",
+                                       style: 'color:#FFFFFF;', class: 'btn btn-danger' %>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
-
-                <div class="col-md-6">
-                  <!--Excluir da tabela de notificação, a notificação-->
-                  <%= form_for notification, html: {method: :delete} do |f| %>
-                      <%= f.submit "Ignore",
-                                   style: 'color:#FFFFFF;', class: 'btn btn-danger' %>
-                  <% end %>
-                </div>
-              </div>
-
-              <!--o rails pega o show daquele objeto(user) no controller&ndash;&gt;-->
-            </div>
             <% end %>
-
-            <!--<div>-->
-
-              <!--< % if (notification.notification_read) %>
-                  <p> < %= link_to notification.follower.name, notification.follower %>
-                    <!--seguiu você.
-                    | < %= time_ago_in_words(notification.created_at) %>
-                    <!--ago</p>-->
-              <!--< % end %>-->
-            <!--</div>-->
           </div>
       <% end %>
     </div>
