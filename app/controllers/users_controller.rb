@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       # Handle a successful update.
       flash[:success] = "Profile updated"
       # if @user.
-      #   #Quando atualizar a bio, como exibir mensagens diferentes?
+      #   Quando atualizar a bio, como exibir mensagens diferentes?
       # flash[:success] = "Bio updated"
       redirect_to @user
     else
@@ -74,12 +74,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                  :password_confirmation, :bio, :avatar, :private_profile)
   end
-
-  # não mostrar a partial dos microposts se o user não possuir relacionamento
-  # def private_profile
-  #   @user = User.find(params[:id])
-  #   redirect_to (@user.url) unless private_profile?
-  # end
 
   # Confirms a logged-in user.
   def logged_in_user

@@ -8,16 +8,18 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:follower_id])
+    notification = Notification.find(params[:notification_id])
+    notification.update(notification_read: true)
+
     current_user.follow(@user)
     # Ajax, which allows web pages
     # to send requests asynchronously
     # to the server without leaving the page
-    flash[:success] = " #{@user.name} was accepted!"
-
+    flash[:success] = "#{@user.name} is following you!"
     # marcar como lida a notificação
+    # como mudar uma coluna na table
 
     redirect_to notifications_url
-
     #not working\/??
     respond_to do |format|
       format.html { redirect_to @user}

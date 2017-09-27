@@ -4,7 +4,7 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.text :message
       t.integer :follower_id
       t.integer :followed_id
-      t.boolean :notification_read
+      t.boolean :notification_read , default:  false
 
       t.timestamps
     end

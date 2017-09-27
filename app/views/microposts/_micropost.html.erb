@@ -1,6 +1,5 @@
 <% @user=micropost.user %>
 <% if !(@user.private_profile) || (@user==current_user) || (current_user.following?(@user)) %>
-    <%= "(#{@user.name}) is following YOU (#{current_user.name})" %>
 <li id="micropost-<%= micropost.id %>">
   <!--< %= link_to gravatar_for(micropost.user, size: 50), micropost.user %>-->
   <!--< %= link_to avatar_for(micropost.user, size: 50), micropost.user %>-->
