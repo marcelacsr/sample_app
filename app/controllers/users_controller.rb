@@ -5,14 +5,14 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])#.per_page(20) not working
+    @users = User.paginate(page: params[:page]) # .per_page(20) not working
   end
 
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    #debugger
-    @notification = Notification.where(followed: @user, follower: current_user).last
+    @notification = Notification.where(followed: @user,
+                                       follower: current_user).last
   end
 
   def new
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      flash[:info] = 'Please check your email to activate your account.'
       redirect_to root_url
     else
       render 'new'
@@ -34,15 +34,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       # Handle a successful update.
-      flash[:success] = "Profile updated"
-      # if @user.
-      #   Quando atualizar a bio, como exibir mensagens diferentes?
-      # flash[:success] = "Bio updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit'
@@ -51,19 +47,19 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = 'User deleted'
     redirect_to users_url
   end
 
   def following
-    @title = "Following"
+    @title = 'Following'
     @user  = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = 'Followers'
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
@@ -73,16 +69,16 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation, :bio, :avatar, :private_profile)
+                                 :password_confirmation, :bio, :avatar,
+                                 :private_profile)
   end
 
   # Confirms a logged-in user.
   def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
+    return unless logged_in?
+    store_location
+    flash[:danger] = 'Please log in.'
+    redirect_to login_url
   end
 
   # Confirms the correct user.
@@ -95,5 +91,4 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
-
 end
