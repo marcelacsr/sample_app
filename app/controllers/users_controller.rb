@@ -75,10 +75,11 @@ class UsersController < ApplicationController
 
   # Confirms a logged-in user.
   def logged_in_user
-    return unless logged_in?
+    unless logged_in?
     store_location
     flash[:danger] = 'Please log in.'
     redirect_to login_url
+      end
   end
 
   # Confirms the correct user.

@@ -62,5 +62,4 @@ ActiveRecord::Schema.define(version: 20170920214429) do
     t.boolean "private_profile", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
-
 end
