@@ -1,47 +1,35 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
-
   # Here the option dependent: :destroy arranges for
   # the dependent microposts to be destroyed when the
   # user itself is destroyed. This prevents userless
   # microposts from being stranded in the database
   # when admins choose to remove users from the system.
-
   # has_many :sent_notifications, class_name: "Notification",
   #          foreign_key: "follower_id"
-
-  has_many :received_notifications, class_name: "Notification",
-           foreign_key: "followed_id"
-
-  has_attached_file :avatar, styles: {medium: "200x200>", thumb: "50x50"}, default_url: ''
+  has_many :received_notifications, class_name: 'Notification',
+           foreign_key: 'followed_id'
+  has_attached_file :avatar, styles: {medium: '200x200', thumb: '50x50'},
+                    default_url: ''
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
-
-  has_many :active_relationships, class_name: "Relationship",
-           foreign_key: "follower_id",
+  has_many :active_relationships, class_name: 'Relationship',
+           foreign_key: 'follower_id',
            dependent: :destroy
-
-  has_many :passive_relationships, class_name: "Relationship",
-           foreign_key: "followed_id",
+  has_many :passive_relationships, class_name: 'Relationship',
+           foreign_key: 'followed_id',
            dependent: :destroy
-
   has_many :following, through: :active_relationships, source: :followed
-
   has_many :followers, through: :passive_relationships, source: :follower
-
   attr_accessor :remember_token, :activation_token, :reset_token
-
   before_save :downcase_email
   before_create :create_activation_digest
-
   validates :name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
             format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false}
   has_secure_password
-
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
-
   validates :bio, length: {maximum: 160}
 
   # validates :private_profile, presence: true
@@ -103,9 +91,6 @@ class User < ApplicationRecord
 
   def send_notification_email
     UserMailer.notification_email(self).deliver_now
-    # UserMailer.create_notification_email
-  #????????????????????????????????????????
-
   end
 
   # Sets the password reset attributes.
@@ -140,7 +125,6 @@ class User < ApplicationRecord
   # Follows a user.
   def follow(other_user)
     followers << other_user
-    #Notification.create({followed_id: other_user.id, follower_id: id })
   end
 
   # Unfollows a user.
@@ -159,18 +143,9 @@ class User < ApplicationRecord
   end
 
   def send_follow_notification(other_user)
-      Notification.create({followed_id: other_user.id, follower_id: id})
-    #send email to followed bugado
+    Notification.create({ followed_id: other_user.id, follower_id: id })
     send_notification_email
   end
-
-  # def received_notifications(notification)
-  #   received_notifications << notification
-  # end
-  #
-  # def send_notifications(notification)
-  #   send_notifications << notification
-  # end
 
   private
 
@@ -184,5 +159,4 @@ class User < ApplicationRecord
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
-
 end
