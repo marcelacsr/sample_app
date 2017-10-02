@@ -21,25 +21,16 @@
                                                notification.follower_id %>
                           <%= hidden_field_tag :notification_id,
                                                notification.id %>
-                          <%= f.submit "Approve", style: 'color:#FFFFFF;',
+                          <%= f.submit 'Approve', style: 'color:#FFFFFF;',
                                        class: 'btn btn-success' %>
                       <% end %>
                     </div>
                     <div class="col-md-6">
-                      <!--O botão de ignorar uma notificação poderia ser
-                      implementado com o "button_to", ou até mesmo o "link_to",
-                      que se vc passar a mesma opção "method: :delete", ambos
-                      funcionarão da mesma forma. O button_to vai automaticamente
-                      criar o form pra vc, e o link_to vai simular o form
-                      automaticamente através de JS do Rails.-->
-                      <%= form_for notification, html: {method: :delete} do |f| %>
-                          <%= f.submit "Ignore", style: 'color:#FFFFFF;',
-                                       class: 'btn btn-danger' %>
-                          <!--verificar se esta funfanfo \/-->
-                          <%= link_to "Ignore", notification, style: 'color:#FFFFFF;',
-                                      class: 'btn btn-danger pull-right',
-                                      method: :delete, data: {confirm: "You sure?"} %>
-                      <% end %>
+                      <%= button_to 'Ignore', notification,
+                                    style: 'color:#FFFFFF;',
+                                    class: 'btn btn-danger pull-right',
+                                    method: :delete,
+                                    data: {confirm: 'You sure?'} %>
                     </div>
                   </div>
                 </div>
