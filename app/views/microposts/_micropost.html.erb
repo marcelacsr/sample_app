@@ -1,16 +1,11 @@
 <% @user=micropost.user %>
 <% if !(@user.private_profile) || (@user==current_user) || (current_user.following?(@user)) %>
 <li id="micropost-<%= micropost.id %>">
-  <!--< %= link_to gravatar_for(micropost.user, size: 50), micropost.user %>-->
-  <!--< %= link_to avatar_for(micropost.user, size: 50), micropost.user %>-->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
-        <%= link_to avatar_for(micropost.user) %>
+        <%= link_to avatar_for(micropost.user, size: 80) %>
       </div>
-
-      <!--< %= image_tag micropost.user.avatar.url, size: 50 %>-->
-      <!--outros users mostrando missing no lugar da imagem-->
       <div class="col-md-10">
         <div class="user">
           <%= link_to micropost.user.name, micropost.user %>

@@ -1,20 +1,10 @@
 <li class="line">
-
-  <!--#todo-->
-  <!--< %= avatar_for current_user, size: 50 %> not working-->
-  <%= gravatar_for user, size: 50 %>
-
-  <!--consertar isso /\-->
-
+  <%= avatar_for user, size: 80 %>
   <%= link_to user.name, user %>
   <%= render 'shared/stats' %>
-
-  <!--user.name=atributo nome do obj, path show#object == show#user-->
-  <!--User delete links (viewable only by admins)-->
   <% if current_user.admin? && !current_user?(user) %>
         <%= link_to "delete", user, style: 'color:#FFFFFF;',
                       class: 'btn btn-danger pull-right',
                     method: :delete, data: {confirm: "You sure?"} %>
   <% end %>
-
 </li>

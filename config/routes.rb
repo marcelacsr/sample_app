@@ -29,10 +29,9 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :notifications do
+  resources :notifications, only: [:index, :create, :destroy] do
     post :undo
   end
-
 end
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
