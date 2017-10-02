@@ -11,7 +11,7 @@ class User < ApplicationRecord
            foreign_key: 'followed_id'
   has_attached_file :avatar, styles: { medium: '200x200', thumb: '50x50' },
                     default_url: ''
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :avatar, content_type: %r{/\Aimage\/.*\z/}
   has_many :active_relationships, class_name: 'Relationship',
            foreign_key: 'follower_id',
            dependent: :destroy
@@ -31,18 +31,6 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :bio, length: { maximum: 160 }
-
-  # Returns the hash digest of the given string.
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-               BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
-
-  # Returns a random token.
-  def User.new_token
-    SecureRandom.urlsafe_base64 # method for generating tokens
-  end
 
   # Remembers a user in the database for use in persistent sessions.
   def remember
@@ -78,7 +66,7 @@ class User < ApplicationRecord
 
   # Activates an account.
   def activate
-    update_attributes(:activated => true, :activated_at => Time.zone.now)
+    update_attributes(activated: true, activated_at: Time.zone.now)
     # update_attribute(:activated, true)
     # update_attribute(:activated_at, Time.zone.now)
   end
@@ -95,7 +83,8 @@ class User < ApplicationRecord
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
-    update_attributes(:reset_digest => User.digest(reset_token), :reset_sent_at => Time.zone.now)
+    update_attributes(reset_digest: User.digest(reset_token),
+                      reset_sent_at: Time.zone.now)
     # update_attribute(:reset_digest, User.digest(reset_token))
     # update_attribute(:reset_sent_at, Time.zone.now)
   end
