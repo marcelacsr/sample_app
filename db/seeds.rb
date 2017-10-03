@@ -1,25 +1,21 @@
-User.create!(name: "Example User",
-             email: "example@railstutorial.org",
-             password: "foobar",
-             password_confirmation: "foobar",
+User.create!(name: 'Example User',
+             email: 'example@railstutorial.org',
+             password: 'foobar',
+             password_confirmation: 'foobar',
              admin: true,
              activated: true,
-             activated_at: Time.zone.now,
-        # bio:
-        # private_profile: true
-)
+             activated_at: Time.zone.now)
 
 9.times do |n|
   name = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
+  email = "example-#{n + 1}@railstutorial.org"
+  password = 'password'
   User.create!(name: name,
                email: email,
                password: password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now
-  )
+               activated_at: Time.zone.now)
 end
 
 users = User.order(:created_at).take(6)
@@ -30,7 +26,7 @@ end
 
 # Following relationships
 users = User.all
-user  = users.first
+user = users.first
 following = users[2..5]
 followers = users[3..4]
 following.each { |followed| user.follow(followed) }
